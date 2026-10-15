@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthioFun: Grade 3 English Unit 1 Games</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .game-card { transition: all 0.2s ease; }
+        .game-card:hover { transform: translateY(-3px); }
+        .pulse-glow { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-emerald-50 min-h-screen text-slate-800 flex flex-col justify-between">
+
+    <header class="bg-white shadow-sm border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-emerald-600 text-white p-2.5 rounded-2xl font-black text-xl shadow-md">🏫</div>
+                <div>
+                    <h1 class="font-extrabold text-xl text-slate-900 tracking-tight">EthioFun English</h1>
+                    <p class="text-xs text-slate-500 font-semibold">Grade 3 • Unit 1: My School & Grammar</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span id="scoreBadge" class="bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded-full text-sm shadow-sm flex items-center space-x-1">
+                    ⭐ <span id="totalPoints">0</span> Points
+                </span>
+                <button onclick="openModal('rewardsModal')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow transition">🏆 Rewards</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6 w-full flex-grow">
+        
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboardView" class="space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                <div class="absolute right-4 -bottom-6 text-9xl opacity-15 select-none font-black">🎒</div>
+                <div class="relative z-10 max-w-xl">
+                    <span class="bg-emerald-500/55 text-emerald-100 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Ethiopian Curriculum</span>
+                    <h2 class="text-2xl sm:text-3xl font-black mt-2 mb-2">Welcome, Grade 3 Students!</h2>
+                    <p class="text-emerald-100 text-sm sm:text-base leading-relaxed">
+                        Learn school object vocabulary with Amharic translations, practice grammar rules like <strong>Has/Have</strong>, <strong>May/Can Permissions</strong>, <strong>Capitalization</strong>, and pronunciation!
+                    </p>
+                    <div class="mt-4 flex flex-wrap gap-2 items-center">
+                        <button onclick="startVoiceIntro()" class="bg-white text-emerald-700 hover:bg-emerald-50 font-bold px-4 py-2 rounded-xl text-sm shadow flex items-center space-x-2 transition">
+                            🔊 <span>Listen British Golden Narrator Welcome</span>
+                        </button>
+                        <span class="text-emerald-200 text-xs italic">✨ Golden British Voice Enabled</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="font-extrabold text-lg text-slate-800 px-1">Choose a Learning Game</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Game 1 -->
+                <div onclick="switchGame('vocab')" class="game-card bg-white p-5 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-emerald-500 hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl mb-3 shadow-inner">🏫</div>
+                        <h4 class="font-bold text-base text-slate-800">1. School Objects & Amharic</h4>
+                        <p class="text-xs text-slate-500 mt-1">Learn English pronunciation and Amharic equivalents for school items (Whiteboard, Duster, etc.).</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-emerald-600">
+                        <span>Play Flashcards</span> <span>➔</span>
+                    </div>
+                </div>
+
+                <!-- Game 2 -->
+                <div onclick="switchGame('grammarHasHave')" class="game-card bg-white p-5 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-blue-500 hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-3 shadow-inner">✍️</div>
+                        <h4 class="font-bold text-base text-slate-800">2. Has / Have & Do Not Have</h4>
+                        <p class="text-xs text-slate-500 mt-1">Practice singular (has/does not have) vs plural (have/do not have) sentence building.</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-blue-600">
+                        <span>Play Grammar Quiz</span> <span>➔</span>
+                    </div>
+                </div>
+
+                <!-- Game 3 -->
+                <div onclick="switchGame('permission')" class="game-card bg-white p-5 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-purple-500 hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-3 shadow-inner">✋</div>
+                        <h4 class="font-bold text-base text-slate-800">3. Asking Permission (May/Can)</h4>
+                        <p class="text-xs text-slate-500 mt-1">Learn polite expressions like "May I go out?" and "Could I use your ruler?".</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-purple-600">
+                        <span>Play Permission Match</span> <span>➔</span>
+                    </div>
+                </div>
+
+                <!-- Game 4 -->
+                <div onclick="switchGame('capitalization')" class="game-card bg-white p-5 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-amber-500 hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-2xl mb-3 shadow-inner">🔠</div>
+                        <h4 class="font-bold text-base text-slate-800">4. Capital Letters & Full Stop</h4>
+                        <p class="text-xs text-slate-500 mt-1">Identify correct punctuation, proper nouns (Ethiopia, Abay), and sentence endings.</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-amber-600">
+                        <span>Play Punctuation Quiz</span> <span>➔</span>
+                    </div>
+                </div>
+
+                <!-- Game 5 -->
+                <div onclick="switchGame('spelling')" class="game-card bg-white p-5 rounded-2xl shadow-sm border border-slate-100 cursor-pointer hover:border-rose-500 hover:shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-2xl mb-3 shadow-inner">🧩</div>
+                        <h4 class="font-bold text-base text-slate-800">5. Spelling Missing Letters</h4>
+                        <p class="text-xs text-slate-500 mt-1">Fill in missing letters for classroom vocabulary (e.g., d_re_to_).</p>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs font-bold text-rose-600">
+                        <span>Play Spelling Game</span> <span>➔</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME AREA CONTAINER (Hidden by default) -->
+        <div id="gameContainer" class="hidden space-y-4">
+            <div class="flex items-center justify-between bg-white px-4 py-3 rounded-2xl shadow-sm border border-slate-100">
+                <button onclick="returnToDashboard()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl transition flex items-center space-x-1">
+                    <span>⬅️ Back to Dashboard</span>
+                </button>
+                <div id="gameTitleHeader" class="font-extrabold text-sm text-slate-800">Game Mode</div>
+                <div class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full" id="gameProgressTracker">Question 1/5</div>
+            </div>
+
+            <!-- DYNAMIC GAME CONTENT BOX -->
+            <div id="activeGameContent" class="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-slate-100 min-h-[380px] flex flex-col justify-between">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Rewards Modal -->
+    <div id="rewardsModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="font-extrabold text-lg text-slate-800">🏆 Your Learning Trophy Room</h3>
+                <button onclick="closeModal('rewardsModal')" class="text-slate-400 hover:text-slate-600 font-bold text-lg px-2">✕</button>
+            </div>
+            <p class="text-xs text-slate-500">Collect points by playing games and unlock achievements for Grade 3 English!</p>
+            <div class="space-y-3 py-2">
+                <div id="badgeVocab" class="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-100 opacity-60">
+                    <span class="text-2xl">🏫</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-800">School Vocabulary Master</h4>
+                        <p class="text-[10px] text-slate-500">Complete the vocabulary match game</p>
+                    </div>
+                </div>
+                <div id="badgeGrammar" class="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-100 opacity-60">
+                    <span class="text-2xl">✍️</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-800">Grammar Champion</h4>
+                        <p class="text-[10px] text-slate-500">Score 5/5 on Has/Have quiz</p>
+                    </div>
+                </div>
+                <div id="badgeStar" class="flex items-center space-x-3 p-3 rounded-2xl bg-slate-50 border border-slate-100 opacity-60">
+                    <span class="text-2xl">🌟</span>
+                    <div>
+                        <h4 class="font-bold text-xs text-slate-800">Super English Star</h4>
+                        <p class="text-[10px] text-slate-500">Accumulate 50 total points</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeModal('rewardsModal')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl text-xs transition">Close Trophy Room</button>
+        </div>
+    </div>
+
+    <!-- Custom Feedback Modal -->
+    <div id="feedbackModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center space-y-4 shadow-2xl">
+            <div id="feedbackIcon" class="text-5xl">🎉</div>
+            <h3 id="feedbackTitle" class="font-extrabold text-xl text-slate-800">Correct!</h3>
+            <p id="feedbackText" class="text-xs text-slate-600 leading-relaxed">Great job! You earned 10 points.</p>
+            <button onclick="closeFeedbackModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs shadow transition">Continue</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-4 text-center text-xs text-slate-400">
+        EthioFun Interactive Learning • Designed for Ethiopian Grade 3 Students (Unit 1: My School)
+    </footer>
+
+    <script>
+        let totalScore = 0;
+        let currentGame = null;
+        let currentQuestionIndex = 0;
+        let gameDataList = [];
+        let earnedBadges = { vocab: false, grammar: false, star: false };
+        let britishVoice = null;
+        let speechQueueTimer = null;
+
+        // Load voices and select a warm British male voice with a golden tone if available
+        function loadBritishVoice() {
+            if (!('speechSynthesis' in window)) return;
+            const voices = window.speechSynthesis.getVoices();
+            britishVoice = voices.find(v => v.lang === 'en-GB' && (v.name.includes('Oliver') || v.name.includes('George') || v.name.includes('Arthur') || v.name.includes('Ryan') || v.name.includes('Daniel') || v.name.includes('UK English Male') || v.name.includes('Male'))) ||
+                           voices.find(v => v.lang === 'en-GB') || 
+                           voices.find(v => v.lang.startsWith('en')) || 
+                           voices[0];
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = loadBritishVoice;
+            setTimeout(loadBritishVoice, 200);
+        }
+
+        // Unit 1 Vocabulary Database with Amharic equivalents
+        const vocabData = [
+            { en: "White board", am: "ነጭ ሰሌዳ (Nech Seleda)", icon: "📋" },
+            { en: "Duster", am: "ማጥፊያ (Matfiya)", icon: "🧽" },
+            { en: "Ventilator", am: "አየር ማስተላለፊያ (Ayer Mastelalifiya)", icon: "🪟" },
+            { en: "Sports kit", am: "የስፖርት ልብስ (YeSport Libs)", icon: "🎽" },
+            { en: "Arm chair", am: "የእጅ ወንበር (YeEj Wonber)", icon: "🪑" },
+            { en: "Director's office", am: "የዳይሬክተር ቢሮ (YeDirector Biro)", icon: "🏢" },
+            { en: "Library", am: "ቤተ መጻሕፍት (Bete Metsahift)", icon: "📚" },
+            { en: "Rest-room", am: "ሽንት ቤት / መጸዳጃ (Shint Bet)", icon: "🚻" },
+            { en: "Cafe", am: "ካፌ / ቡና ቤት (Cafe)", icon: "☕" },
+            { en: "Gate", am: "በር / መግቢያ (Ber / Megbiya)", icon: "🚪" }
+        ];
+
+        // Grammar Has/Have Data (Blank space practice for kids to try themselves)
+        const grammarHasHaveData = [
+            { sentence: "I _____ an English textbook.", options: ["have", "has", "does not have", "do not have"], answer: "have", explanation: "For pronoun 'I', we use 'have'." },
+            { sentence: "She _____ a red sports bag.", options: ["have", "has", "does not have", "do not have"], answer: "has", explanation: "For singular pronoun 'She', we use 'has'." },
+            { sentence: "The students _____ excellent teachers.", options: ["has", "have", "does not have", "do not have"], answer: "have", explanation: "For plural subjects ('The students'), we use 'have'." },
+            { sentence: "Hagos _____ _____ a jacket today.", options: ["do not have", "does not have", "has", "have"], answer: "does not have", explanation: "For singular subject 'Hagos', we use 'does not have'." },
+            { sentence: "Grade 3 students _____ a clean classroom.", options: ["has", "does not have", "have", "has not"], answer: "have", explanation: "Plural subject takes 'have'." }
+        ];
+
+        // Permission May/Can Data
+        const permissionData = [
+            { q: "Asking permission to go out of the class:", choice: ["May I go out of the class?", "I go out class."], ans: 0 },
+            { q: "Asking politely to ask a question:", choice: ["Could I ask a question, please?", "Can I ask question no?"], ans: 0 },
+            { q: "Giving permission when someone asks 'May I?':", choice: ["No, you cannot.", "Yes, you may."], ans: 1 },
+            { q: "Asking to use a classmate's pencil:", choice: ["Can I use Hanna's pencil?", "Hanna pencil use I?"], ans: 0 }
+        ];
+
+        // Capitalization Data
+        const capitalizationData = [
+            { q: "Which sentence is capitalized correctly?", options: ["river abay originates from ethiopia.", "River Abay originates from Ethiopia.", "river Abay originates from Ethiopia."], ans: 1, explanation: "Proper nouns (Abay, Ethiopia) and start of sentences must be capitalized." },
+            { q: "Which sentence has correct punctuation?", options: ["What is your name.", "What is your name?", "what is your name?"], ans: 1, explanation: "Questions always end with a question mark (?)" },
+            { q: "Choose the correctly capitalized sentence:", options: ["india is a big country.", "India is a big country.", "india Is a Big country."], ans: 1, explanation: "Country names like 'India' start with a capital letter." },
+            { q: "Choose the correct ending punctuation:", options: ["Bewuketu went to school yesterday.", "Bewuketu went to school yesterday?"], ans: 0, explanation: "Statements end with a full stop (period)." }
+        ];
+
+        // Spelling Data
+        const spellingData = [
+            { word: "director", hint: "d _ r e c t _ r", missing: "i, o" },
+            { word: "classroom", hint: "c l _ s s r _ o m", missing: "a, o" },
+            { word: "desk", hint: "d e s _", missing: "k" },
+            { word: "period", hint: "p _ r i _ d", missing: "e, o" },
+            { word: "chalk", hint: "c h _ l k", missing: "a" }
+        ];
+
+        // Strict non-interruptible speech function with robust lock and callback timing
+        let isSpeaking = false;
+
+        function speakText(text, callback) {
+            if (!('speechSynthesis' in window)) {
+                if (callback) callback();
+                return;
+            }
+            
+            // Clear any active queue timers
+            if (speechQueueTimer) {
+                clearTimeout(speechQueueTimer);
+                speechQueueTimer = null;
+            }
+
+            // Cancel any ongoing speech safely
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            if (britishVoice) {
+                utterance.voice = britishVoice;
+            }
+            utterance.rate = 0.82; // Calm, measured golden cadence for young learners
+            utterance.pitch = 0.95; // Warm, golden male tone
+
+            utterance.onstart = function() {
+                isSpeaking = true;
+            };
+
+            utterance.onend = function() {
+                isSpeaking = false;
+                // Give a comfortable 700ms golden pause after speech ends before proceeding
+                speechQueueTimer = setTimeout(() => {
+                    if (callback) callback();
+                }, 700);
+            };
+
+            utterance.onerror = function() {
+                isSpeaking = false;
+                if (callback) callback();
+            };
+
+            // Small delay to ensure clean utterance dispatch
+            setTimeout(() => {
+                window.speechSynthesis.speak(utterance);
+            }, 50);
+        }
+
+        function startVoiceIntro() {
+            speakText("Welcome, brilliant Grade Three students, to Unit One: My School. Let us explore wonderful vocabulary, grammar rules, and polite expressions together.");
+        }
+
+        // Navigation controls
+        function switchGame(gameType) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            currentGame = gameType;
+            currentQuestionIndex = 0;
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+
+            if (gameType === 'vocab') {
+                document.getElementById('gameTitleHeader').textContent = "Game 1: School Vocabulary & Amharic";
+                renderVocabGame();
+            } else if (gameType === 'grammarHasHave') {
+                document.getElementById('gameTitleHeader').textContent = "Game 2: Has / Have Grammar Quiz";
+                gameDataList = grammarHasHaveData;
+                renderGrammarQuiz();
+            } else if (gameType === 'permission') {
+                document.getElementById('gameTitleHeader').textContent = "Game 3: Asking Permission (May/Can)";
+                gameDataList = permissionData;
+                renderPermissionGame();
+            } else if (gameType === 'capitalization') {
+                document.getElementById('gameTitleHeader').textContent = "Game 4: Capitalization & Punctuation";
+                gameDataList = capitalizationData;
+                renderCapitalizationQuiz();
+            } else if (gameType === 'spelling') {
+                document.getElementById('gameTitleHeader').textContent = "Game 5: Classroom Object Spelling";
+                gameDataList = spellingData;
+                renderSpellingGame();
+            }
+        }
+
+        function returnToDashboard() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            document.getElementById('gameContainer').classList.add('hidden');
+            document.getElementById('dashboardView').classList.remove('hidden');
+        }
+
+        function renderVocabGame() {
+            const item = vocabData[currentQuestionIndex];
+            document.getElementById('gameProgressTracker').textContent = `Flashcard ${currentQuestionIndex + 1} of ${vocabData.length}`;
+            
+            const container = document.getElementById('activeGameContent');
+            container.innerHTML = `
+                <div class="text-center space-y-4">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full">Unit 1 Key Vocabulary</span>
+                    <div class="text-7xl py-4">${item.icon}</div>
+                    <h3 class="text-2xl font-black text-slate-900">${item.en}</h3>
+                    <div class="bg-slate-50 border border-slate-100 p-4 rounded-2xl max-w-sm mx-auto">
+                        <p class="text-xs text-slate-500 font-semibold">Amharic Meaning:</p>
+                        <p class="text-lg font-bold text-emerald-700 mt-1">${item.am}</p>
+                    </div>
+                    <div class="flex justify-center space-x-3 pt-4">
+                        <button onclick="speakText('${item.en.replace(/'/g, "\\'")}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow flex items-center space-x-2 transition">
+                            🔊 <span>Pronounce with British Voice</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between pt-6 border-t border-slate-100 mt-6">
+                    <button onclick="prevVocab()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-xs transition ${currentQuestionIndex === 0 ? 'opacity-40 cursor-not-allowed' : ''}">Previous</button>
+                    <button onclick="nextVocab()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-2 rounded-xl text-xs shadow transition">${currentQuestionIndex === vocabData.length - 1 ? 'Finish Game 🏁' : 'Next Word ➔'}</button>
+                </div>
+            `;
+            speakText(item.en);
+        }
+
+        function nextVocab() {
+            if (currentQuestionIndex < vocabData.length - 1) {
+                currentQuestionIndex++;
+                renderVocabGame();
+            } else {
+                totalScore += 25;
+                updateScoreDisplay();
+                earnedBadges.vocab = true;
+                checkBadges();
+                showCustomFeedback("Splendid!", "You completed all school vocabulary flashcards and earned 25 points!", "🏫");
+                speakText("Splendid work, brilliant students! You have successfully completed all school vocabulary flashcards with flying colors.", () => {
+                    returnToDashboard();
+                });
+            }
+        }
+
+        function prevVocab() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderVocabGame();
+            }
+        }
+
+        function renderGrammarQuiz() {
+            const q = gameDataList[currentQuestionIndex];
+            document.getElementById('gameProgressTracker').textContent = `Question ${currentQuestionIndex + 1} of ${gameDataList.length}`;
+            
+            const container = document.getElementById('activeGameContent');
+            let optionsHTML = '';
+            q.options.forEach(opt => {
+                const safeOpt = opt.replace(/'/g, "\\'");
+                const safeAns = q.answer.replace(/'/g, "\\'");
+                const safeExp = q.explanation.replace(/'/g, "\\'");
+                optionsHTML += `<button onclick="checkGrammarAnswer(this, '${safeOpt}', '${safeAns}', '${safeExp}')" class="grammar-opt-btn bg-slate-50 hover:bg-blue-50 border-2 border-slate-100 hover:border-blue-500 font-bold text-slate-800 py-3.5 px-4 rounded-2xl text-sm transition shadow-sm">${opt}</button>`;
+            });
+
+            // Replace missing word with a blank underscore container for kids to solve themselves
+            const blankSentence = q.sentence.replace(/have|has|does not have|do not have/, '<span id="blankWordSlot" class="inline-block border-b-4 border-blue-500 px-4 py-1 mx-1 text-blue-600 font-extrabold bg-blue-50/50 rounded-lg">_____</span>');
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="inline-block bg-blue-100 text-blue-800 text-xs font-extrabold px-3 py-1 rounded-full">Game 2: Fill in the Blank (Has / Have)</div>
+                    <h3 class="text-xl font-bold text-slate-900 leading-relaxed">${blankSentence}</h3>
+                    <p class="text-xs text-slate-500 italic">Try it yourself! Click the correct word to fill in the blank space:</p>
+                    <div id="grammarOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        ${optionsHTML}
+                    </div>
+                </div>
+                <div class="pt-4 text-xs text-slate-400 text-center">Rule: Singular subjects take 'has', plural subjects or 'I' take 'have'.</div>
+            `;
+            speakText(q.sentence.replace(/have|has|does not have|do not have/, 'blank'));
+        }
+
+        function checkGrammarAnswer(btnElement, selected, correct, explanation) {
+            // Disable all option buttons immediately to prevent multiple clicks
+            const allBtns = document.querySelectorAll('.grammar-opt-btn');
+            allBtns.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-blue-50', 'hover:border-blue-500', 'cursor-pointer');
+                // Instantly highlight correct answer in emerald green, and wrong clicked one in rose red
+                if (btn.textContent.trim() === correct) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'shadow-lg', 'scale-[1.02]');
+                } else if (btn === btnElement && selected !== correct) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600', 'opacity-90');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            // Fill in the blank word slot instantly
+            const slot = document.getElementById('blankWordSlot');
+            if (slot) {
+                slot.textContent = selected;
+                if (selected === correct) {
+                    slot.className = "inline-block px-4 py-1 mx-1 text-white font-extrabold bg-emerald-600 rounded-lg shadow-md animate-bounce";
+                } else {
+                    slot.className = "inline-block px-4 py-1 mx-1 text-white font-extrabold bg-rose-500 rounded-lg shadow-md line-through";
+                }
+            }
+
+            if (selected === correct) {
+                totalScore += 10;
+                updateScoreDisplay();
+                showCustomFeedback("Correct! 🎉", `${explanation} (+10 Points)`, "🌟");
+                
+                // Speak and wait for full completion before transitioning
+                speakText(`Magnificent! That is completely correct. ${explanation}`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderGrammarQuiz();
+                    } else {
+                        earnedBadges.grammar = true;
+                        checkBadges();
+                        showCustomFeedback("Quiz Completed!", "You finished the Has/Have grammar game!", "🏆");
+                        speakText("Fantastic achievement! You have successfully mastered the grammar quiz.", () => {
+                            returnToDashboard();
+                        });
+                    }
+                });
+            } else {
+                showCustomFeedback("Not Quite 💡", `Correct answer was '${correct}'. ${explanation}`, "💪");
+                
+                speakText(`Not quite right. The correct answer is ${correct}. Remember, ${explanation}`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderGrammarQuiz();
+                    } else {
+                        earnedBadges.grammar = true;
+                        checkBadges();
+                        returnToDashboard();
+                    }
+                });
+            }
+        }
+
+        function renderPermissionGame() {
+            const q = gameDataList[currentQuestionIndex];
+            document.getElementById('gameProgressTracker').textContent = `Scenario ${currentQuestionIndex + 1} of ${gameDataList.length}`;
+
+            let choicesHTML = '';
+            q.choice.forEach((choiceText, idx) => {
+                choicesHTML += `<button onclick="checkPermissionAnswer(this, ${idx}, ${q.ans})" class="permission-opt-btn w-full text-left bg-slate-50 hover:bg-purple-50 border-2 border-slate-100 hover:border-purple-500 font-bold text-slate-800 p-4 rounded-2xl text-sm transition shadow-sm flex items-center justify-between"><span>${choiceText}</span><span class="text-xs text-slate-400">Select ➔</span></button>`;
+            });
+
+            const container = document.getElementById('activeGameContent');
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="inline-block bg-purple-100 text-purple-800 text-xs font-extrabold px-3 py-1 rounded-full">Asking for & Offering Permission</div>
+                    <h3 class="text-lg font-bold text-slate-900">${q.q}</h3>
+                    <div class="space-y-3">
+                        ${choicesHTML}
+                    </div>
+                </div>
+            `;
+            speakText(q.q);
+        }
+
+        function checkPermissionAnswer(btnElement, selectedIdx, correctIdx) {
+            const allBtns = document.querySelectorAll('.permission-opt-btn');
+            allBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correctIdx) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'shadow-lg');
+                } else if (btn === btnElement && selectedIdx !== correctIdx) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            if (selectedIdx === correctIdx) {
+                totalScore += 10;
+                updateScoreDisplay();
+                showCustomFeedback("Excellent! 👏", "That is the correct polite permission expression! (+10 pts)", "✨");
+                speakText("Brilliant! Perfectly polite and respectful speech.", () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderPermissionGame();
+                    } else {
+                        showCustomFeedback("Completed!", "You finished the Permission game!", "🏆");
+                        speakText("Well done on mastering polite classroom permissions.", () => {
+                            returnToDashboard();
+                        });
+                    }
+                });
+            } else {
+                showCustomFeedback("Try Again! 💡", "Review polite structures with 'May I' or 'Could I'.", "📖");
+                speakText("Have another try. Polite expressions make our school a wonderful place.", () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderPermissionGame();
+                    } else {
+                        returnToDashboard();
+                    }
+                });
+            }
+        }
+
+        function renderCapitalizationQuiz() {
+            const q = gameDataList[currentQuestionIndex];
+            document.getElementById('gameProgressTracker').textContent = `Question ${currentQuestionIndex + 1} of ${gameDataList.length}`;
+
+            let optionsHTML = '';
+            q.options.forEach((opt, idx) => {
+                const safeExp = q.explanation.replace(/'/g, "\\'");
+                optionsHTML += `<button onclick="checkCapitalizationAnswer(this, ${idx}, ${q.ans}, '${safeExp}')" class="cap-opt-btn w-full text-left bg-slate-50 hover:bg-amber-50 border-2 border-slate-100 hover:border-amber-500 font-bold text-slate-800 p-4 rounded-2xl text-sm transition shadow-sm">${opt}</button>`;
+            });
+
+            const container = document.getElementById('activeGameContent');
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="inline-block bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full">Capital Letters & Full Stop</div>
+                    <h3 class="text-lg font-bold text-slate-900">${q.q}</h3>
+                    <div class="space-y-3">
+                        ${optionsHTML}
+                    </div>
+                </div>
+            `;
+            speakText(q.q);
+        }
+
+        function checkCapitalizationAnswer(btnElement, selectedIdx, correctIdx, explanation) {
+            const allBtns = document.querySelectorAll('.cap-opt-btn');
+            allBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correctIdx) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600', 'shadow-lg');
+                } else if (btn === btnElement && selectedIdx !== correctIdx) {
+                    btn.classList.remove('bg-slate-50', 'border-slate-100', 'text-slate-800');
+                    btn.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+                } else {
+                    btn.classList.add('opacity-50');
+                }
+            });
+
+            if (selectedIdx === correctIdx) {
+                totalScore += 10;
+                updateScoreDisplay();
+                showCustomFeedback("Correct! 🎉", `${explanation} (+10 Points)`, "🌟");
+                speakText(`Spot on! Excellent attention to detail. ${explanation}`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderCapitalizationQuiz();
+                    } else {
+                        showCustomFeedback("Quiz Complete!", "You finished Capitalization & Punctuation game!", "🏆");
+                        speakText("Fantastic work on capitalization and punctuation rules.", () => {
+                            returnToDashboard();
+                        });
+                    }
+                });
+            } else {
+                showCustomFeedback("Not Quite", `Explanation: ${explanation}`, "💡");
+                speakText(`Not quite right. Remember golden rule: ${explanation}`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderCapitalizationQuiz();
+                    } else {
+                        returnToDashboard();
+                    }
+                });
+            }
+        }
+
+        function renderSpellingGame() {
+            const item = gameDataList[currentQuestionIndex];
+            document.getElementById('gameProgressTracker').textContent = `Word ${currentQuestionIndex + 1} of ${gameDataList.length}`;
+
+            const container = document.getElementById('activeGameContent');
+            const safeWord = item.word.replace(/'/g, "\\'");
+            container.innerHTML = `
+                <div class="text-center space-y-6">
+                    <div class="inline-block bg-rose-100 text-rose-800 text-xs font-extrabold px-3 py-1 rounded-full">Fill in Missing Letters</div>
+                    <div>
+                        <p class="text-xs text-slate-500">Spell the word for this classroom object:</p>
+                        <h3 class="text-3xl font-black text-slate-900 tracking-wider mt-2">${item.hint}</h3>
+                    </div>
+                    <div class="max-w-xs mx-auto space-y-3">
+                        <input type="text" id="spellingInput" placeholder="Type full word here..." class="w-full text-center bg-slate-50 border-2 border-slate-200 focus:border-rose-500 font-bold p-3.5 rounded-2xl text-base outline-none">
+                        <button onclick="submitSpelling('${safeWord}')" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-3.5 rounded-2xl text-xs shadow transition">Check Spelling</button>
+                    </div>
+                </div>
+            `;
+            speakText("Spell the missing letters for this word carefully.");
+        }
+
+        function submitSpelling(correctWord) {
+            const userVal = document.getElementById('spellingInput').value.trim().toLowerCase();
+            if (userVal === correctWord.toLowerCase()) {
+                totalScore += 15;
+                updateScoreDisplay();
+                showCustomFeedback("Correct Spelling! 🎯", `Amazing! '${correctWord}' is spelled correctly! (+15 pts)`, "🌟");
+                speakText(`Splendid spelling! ${correctWord} is precisely correct. Keep up this magnificent progress!`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderSpellingGame();
+                    } else {
+                        showCustomFeedback("Fantastic!", "You completed the Spelling Game!", "🏆");
+                        speakText("Superb job completing all the spelling challenges with great distinction.", () => {
+                            returnToDashboard();
+                        });
+                    }
+                });
+            } else {
+                showCustomFeedback("Incorrect", `The correct spelling was '${correctWord}'. Try the next one!`, "💪");
+                speakText(`The correct spelling was ${correctWord}. Let us try the next challenge together.`, () => {
+                    closeFeedbackModal();
+                    if (currentQuestionIndex < gameDataList.length - 1) {
+                        currentQuestionIndex++;
+                        renderSpellingGame();
+                    } else {
+                        returnToDashboard();
+                    }
+                });
+            }
+        }
+
+        // Score & Rewards updates
+        function updateScoreDisplay() {
+            document.getElementById('totalPoints').textContent = totalScore;
+            if (totalScore >= 50) {
+                earnedBadges.star = true;
+                checkBadges();
+            }
+        }
+
+        function checkBadges() {
+            if (earnedBadges.vocab) {
+                const el = document.getElementById('badgeVocab');
+                el.classList.remove('opacity-60');
+                el.classList.add('bg-emerald-50', 'border-emerald-200');
+            }
+            if (earnedBadges.grammar) {
+                const el = document.getElementById('badgeGrammar');
+                el.classList.remove('opacity-60');
+                el.classList.add('bg-blue-50', 'border-blue-200');
+            }
+            if (earnedBadges.star) {
+                const el = document.getElementById('badgeStar');
+                el.classList.remove('opacity-60');
+                el.classList.add('bg-amber-50', 'border-amber-200');
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function showCustomFeedback(title, text, icon) {
+            document.getElementById('feedbackTitle').textContent = title;
+            document.getElementById('feedbackText').textContent = text;
+            document.getElementById('feedbackIcon').textContent = icon;
+            document.getElementById('feedbackModal').classList.remove('hidden');
+        }
+
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
